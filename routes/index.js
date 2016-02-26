@@ -28,12 +28,17 @@ module.exports = function(){
       		});
         },
         postPage: function(req, res){
+            console.log(req.body);
+            if( req.body.title == '' || req.body.content == '' ){
+                return res.send("Invalid page request").status(500);
+            }
         	var newPage = new Page({title: req.body.title, content: req.body.content});
         	newPage.save(function(err, page){
         		if (err){
         			res.send(err).status(500);
         			console.error(err);
         		} else {
+                    console.log(page);
         			res.json(page);
         		}
         	});
