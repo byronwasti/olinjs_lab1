@@ -39,7 +39,7 @@ module.exports = function(){
         	});
         },
         editPage: function(req, res){
-        	Page.findByIdAndUpdate(req.query.id, {title:req.body.title, content:req.body.content}, {new: true}, function(err, page){
+        	Page.findByIdAndUpdate(req.body.id, {title:req.body.title, content:req.body.content}, {new: true}, function(err, page){
         		if (err){
         			res.send(err).status(500);
         			console.error(err);
