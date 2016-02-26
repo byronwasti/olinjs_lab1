@@ -12,6 +12,16 @@ module.exports = function(){
         		}
         	});
         },
-        
+      	getPage: function(req, res){
+
+        },
+        postPage: function(req, res){
+
+        },
+        editPage: function(req, res){
+
+		},
+		deletePage: function(req, res){
+		}
     }
 }
