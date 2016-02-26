@@ -1,0 +1,30 @@
+{
+  "name": "olinjs_lab1",
+  "version": "1.0.0",
+  "description": "Byron and Zoher's wiki web app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/byronwasti/olinjs_lab1.git"
+  },
+  "keywords": [
+    "wiki",
+    "drugs",
+    "react"
+  ],
+  "author": "Zoher and Byron",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/byronwasti/olinjs_lab1/issues"
+  },
+  "homepage": "https://github.com/byronwasti/olinjs_lab1#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.5",
+    "morgan": "^1.7.0"
+  }
+}
