@@ -15,5 +15,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Base Routes
 app.get('/', index.home);
+app.get('/api/page', index.getPage);
+app.post('/api/page', index.postPage);
+app.put('/api/page', index.editPage);
 
 app.listen(process.env.PORT || 3000);
