@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended:false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Base Routes
-app.get('/', index.home);
+app.get('/api/titles', index.getTitles);
 app.get('/api/page', index.getPage);
 app.post('/api/page', index.postPage);
 app.put('/api/page', index.editPage);

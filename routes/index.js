@@ -2,14 +2,14 @@ var Page = require('../models/pageModel.js');
 
 module.exports = function(){
     return {
-        home: function(req, res){
+        getTitles: function(req, res){
         	Page.find({}, function(err, pages){
         		if (err){
         			res.send(err).status(500);
         			console.error(err);
         		} else {
         			var titles = pages.map(function(page){
-        				return page.title;
+        				return {title:page.title, _id:page._id};
         			});
         			console.log(titles);
         			titles = {titles: titles};
