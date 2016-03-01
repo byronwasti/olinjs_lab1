@@ -20,7 +20,7 @@ var WikiBox = React.createClass({
         }.bind(this);
         xhr.send();
     },
-    loadPageFromServer: function(id, newTitles){
+    loadPageFromServer: function(id){
         xhr.open('GET', '/api/page?id=' + id);
         xhr.onreadystatechange = function(){
             if (xhr.readyState == 4 && xhr.status == 200) {
@@ -39,6 +39,9 @@ var WikiBox = React.createClass({
             return title;
         });
         this.setState({pageTitles: newTitles});
+    },
+    createNewPage: function(){
+        this.setState({pageTitle: '', content: ''});
     },
     editPageServerUpdate: function(title,content){
         xhr.open('PUT', '/api/page');
@@ -69,12 +72,11 @@ var WikiBox = React.createClass({
 <div className='wikiBox'>
 <NavBar />
 <div className='flexWrapper'>
-    <PageList titles={this.state.pageTitles} getPage={this.loadPageFromServer}/>
+    <PageList titles={this.state.pageTitles} getPage={this.loadPageFromServer} createNewPage={this.createNewPage}/>
     <PageBox title={this.state.pageTitle} 
              content={this.state.pageContent}
              updateServer={this.editPageServerUpdate}
-             deletePage={this.deletePageServerUpdate}
-             />
+             deletePage={this.deletePageServerUpdate}/>
 </div>
 </div>
                );

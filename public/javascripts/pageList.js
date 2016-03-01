@@ -1,12 +1,16 @@
 var PageList = React.createClass({
     render: function(){
+        // var ulStyle = {"listStyleType": "none"};
         return (
         <div className='pageList'>
+        <ul style={{"listStyleType": "none"}}>  //byron we'll add this to the css later
         {this.props.titles.map(function(title){
             return (
-        <PageListElement title={title.title} key={title._id} id={title._id} getPage={this.props.getPage} isPressed={title.isClicked}/>
+        <li><PageListElement title={title.title} key={title._id} id={title._id} getPage={this.props.getPage} isPressed={title.isClicked}/></li>
                    );
         }, this)}
+        <li><button type="button" onClick={this.props.createNewPage}>New Page</button></li>
+        </ul>
         </div>
                );
     }
