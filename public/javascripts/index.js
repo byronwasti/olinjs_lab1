@@ -2,7 +2,7 @@ var xhr = new XMLHttpRequest();
 
 var WikiBox = React.createClass({
     getInitialState: function(){
-        return { pageTitles: [], pageTitle: "", pageContent: "" };
+        return { pageTitles: [], pageTitle: "", pageContent: "", pageId:""};
     },
     componentDidMount: function(){
         this.loadPageTitlesFromServer();
@@ -43,8 +43,29 @@ var WikiBox = React.createClass({
     createNewPage: function(){
         this.setState({pageTitle: '', content: ''});
     },
-    editPageServerUpdate: function(){
-        console.log('Todo');
+    editPageServerUpdate: function(title,content){
+        xhr.open('PUT', '/api/page');
+        xhr.onreadystatechange = function(){
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var page = JSON.parse(xhr.responseText);
+                this.setState({pageTitle: page.title, pageContent:page.content, pageId: page._id});
+            }
+        }.bind(this);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.send('title='+title+'&content='+content+'&id='+this.state.pageId);
+
+        this.setState({pageTitle: title, pageContent:content});
+    },
+    deletePageServerUpdate: function(){
+        xhr.open('DELETE', '/api/page');
+        xhr.onreadystatechange = function(){
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var page = JSON.parse(xhr.responseText);
+                this.setState({pageTitle: '', pageContent: '', pageId: ''});
+            }
+        }.bind(this);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.send('id='+this.state.pageId);
     },
     render: function(){
         return (
@@ -54,7 +75,8 @@ var WikiBox = React.createClass({
     <PageList titles={this.state.pageTitles} getPage={this.loadPageFromServer} createNewPage={this.createNewPage}/>
     <PageBox title={this.state.pageTitle} 
              content={this.state.pageContent}
-             updateServer={this.editPageServerUpdate}/>
+             updateServer={this.editPageServerUpdate}
+             deletePage={this.deletePageServerUpdate}/>
 </div>
 </div>
                );
