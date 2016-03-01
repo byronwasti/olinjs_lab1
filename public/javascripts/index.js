@@ -26,7 +26,7 @@ var WikiBox = React.createClass({
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var page = JSON.parse(xhr.responseText);
                 console.log(page);
-                this.setState({pageTitle: page.title, pageContent: page.title, pageId: id});
+                this.setState({pageTitle: page.title, pageContent: page.content, pageId: id});
             }
         }.bind(this);
         xhr.send();
@@ -40,6 +40,9 @@ var WikiBox = React.createClass({
         });
         this.setState({pageTitles: newTitles});
     },
+    editPageServerUpdate: function(){
+        console.log('Todo');
+    },
     render: function(){
         return (
 <div className='wikiBox'>
@@ -48,7 +51,7 @@ var WikiBox = React.createClass({
     <PageList titles={this.state.pageTitles} getPage={this.loadPageFromServer}/>
     <PageBox title={this.state.pageTitle} 
              content={this.state.pageContent}
-             updateServer={this.updateServer}
+             updateServer={this.editPageServerUpdate}
              />
 </div>
 </div>

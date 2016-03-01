@@ -5,6 +5,13 @@ var PageBox = React.createClass({
                  title: this.props.title
                 };
     },
+    componentWillReceiveProps: function(nextProps){
+        console.log('test');
+        this.setState({ editable: false,
+                 content: nextProps.content,
+                 title: nextProps.title
+                });
+    },
     makeEditable: function(){
         this.setState({editable: true});
     },
