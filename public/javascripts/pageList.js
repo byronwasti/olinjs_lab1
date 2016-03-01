@@ -3,7 +3,7 @@ var PageList = React.createClass({
         // var ulStyle = {"listStyleType": "none"};
         return (
         <div className='pageList'>
-        <ul style={{"listStyleType": "none"}}>  //byron we'll add this to the css later
+        <ul style={{"listStyleType": "none"}}>
         {this.props.titles.map(function(title){
             return (
         <li><PageListElement title={title.title} key={title._id} id={title._id} getPage={this.props.getPage} isPressed={title.isClicked}/></li>
