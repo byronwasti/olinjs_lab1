@@ -2,7 +2,7 @@ var xhr = new XMLHttpRequest();
 
 var WikiBox = React.createClass({
     getInitialState: function(){
-        return { pageTitles: [] };
+        return { pageTitles: [], pageTitle: "", pageContent: "" };
     },
     componentDidMount: function(){
         this.loadPageTitlesFromServer();
@@ -43,12 +43,19 @@ var WikiBox = React.createClass({
     createNewPage: function(){
         this.setState({pageTitle: '', content: ''});
     },
+    editPageServerUpdate: function(){
+        console.log('Todo');
+    },
     render: function(){
         return (
 <div className='wikiBox'>
 <NavBar />
-<PageList titles={this.state.pageTitles} getPage={this.loadPageFromServer} createNewPage={this.createNewPage}/>
-<PageBox title={this.state.pageTitle} content={this.state.pageContent}/>
+<div className='flexWrapper'>
+    <PageList titles={this.state.pageTitles} getPage={this.loadPageFromServer} createNewPage={this.createNewPage}/>
+    <PageBox title={this.state.pageTitle} 
+             content={this.state.pageContent}
+             updateServer={this.editPageServerUpdate}/>
+</div>
 </div>
                );
     }

@@ -1,5 +1,6 @@
 var express = require('express');
 var db = require('./db');
+var sassMiddleware = require('node-sass-middleware');
 
 var index = require('./routes/index')();
 
@@ -9,6 +10,15 @@ var bodyParser = require('body-parser');
 
 var app = express();
 app.use(logger('dev'));
+app.use(sassMiddleware({
+  src: path.join(__dirname, '/sass'),
+  dest: path.join(__dirname, '/public/styles'),
+  debug: true,
+  outputStyle: 'compressed',
+  response: false,
+  prefix: '/styles'
+}));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended:false}));
 app.use(express.static(path.join(__dirname, 'public')));
