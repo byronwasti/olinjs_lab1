@@ -15,13 +15,24 @@ var WikiBox = React.createClass({
             }
         }.bind(this);
         xhr.send();
+
+    loadPageFromServer: function(id){
+        xhr.open('GET', '/api/page?id=' + id);
+        xhr.onreadystatechange = function(){
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var page = JSON.parse(xhr.responseText);
+                console.log(page);
+                this.setState({pageTitle: page.title, pageContent: page.title, pageId: id});
+            }
+        }.bind(this);
+        xhr.send();
     },
     render: function(){
         return (
 <div className='wikiBox'>
 <NavBar />
-<PageList titles={this.state.pageTitles}/>
-<PageBox />
+<PageList titles={this.state.pageTitles} getPage={this.loadPageFromServer}/>
+<PageBox title={this.state.pageTitle} content={this.state.pageContent}/>
 </div>
                );
     }
