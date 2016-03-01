@@ -23,7 +23,7 @@ var PageBox = React.createClass({
     },
     finishEdit: function(){
         this.setState({editable: false});
-        this.props.updateServer();
+        this.props.updateServer(this.state.title, this.state.content);
     },
     cancelEdit: function(){
         this.setState({editable: false,
@@ -32,6 +32,7 @@ var PageBox = React.createClass({
                         });
     },
     deletePage: function(){
+        this.props.deletePage();
     },
     render: function(){
         if( this.state.editable ){
