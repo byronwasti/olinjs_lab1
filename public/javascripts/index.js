@@ -20,13 +20,13 @@ var WikiBox = React.createClass({
         }.bind(this);
         xhr.send();
     },
-    loadPageFromServer: function(id, newTitles){
+    loadPageFromServer: function(id){
         xhr.open('GET', '/api/page?id=' + id);
         xhr.onreadystatechange = function(){
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var page = JSON.parse(xhr.responseText);
                 console.log(page);
-                this.setState({pageTitle: page.title, pageContent: page.title, pageId: id});
+                this.setState({pageTitle: page.title, pageContent: page.content, pageId: id});
             }
         }.bind(this);
         xhr.send();
@@ -40,11 +40,14 @@ var WikiBox = React.createClass({
         });
         this.setState({pageTitles: newTitles});
     },
+    createNewPage: function(){
+        this.setState({pageTitle: '', content: ''});
+    },
     render: function(){
         return (
 <div className='wikiBox'>
 <NavBar />
-<PageList titles={this.state.pageTitles} getPage={this.loadPageFromServer} setUpPageList={this.setUpPageList}/>
+<PageList titles={this.state.pageTitles} getPage={this.loadPageFromServer} createNewPage={this.createNewPage}/>
 <PageBox title={this.state.pageTitle} content={this.state.pageContent}/>
 </div>
                );

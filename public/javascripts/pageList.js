@@ -7,6 +7,7 @@ var PageList = React.createClass({
         <PageListElement title={title.title} key={title._id} id={title._id} getPage={this.props.getPage} isPressed={title.isClicked}/>
                    );
         }, this)}
+        <button type="button" onClick={this.props.createNewPage}>New Page</button>
         </div>
                );
     }
