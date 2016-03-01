@@ -18,25 +18,37 @@ var PageBox = React.createClass({
         this.setState({editable: false});
         this.props.updateServer();
     },
+    cancelEdit: function(){
+        this.setState({editable: false,
+                       content: this.props.content,
+                       title: this.props.title
+                        });
+    },
+    deletePage: function(){
+    },
     render: function(){
         if( this.state.editable ){
             var title = <PageTitleEdit title={this.state.title} 
                                        update={this.onTitleChange}/>
             var content = <PageContentEdit content={this.state.content}
                                        update={this.onContentChange}/>
-            var button = <DoneButton onClick={this.finishEdit}/>
+            var button = <Button value='Done' onClick={this.finishEdit}/>
+            var deleteButton = <Button value='Delete' onClick={this.deletePage}/>
+            var cancelButton = <Button value='Cancel' onClick={this.cancelEdit}/>
         }else{
             var title = <PageTitle title={this.state.title} />
             var content = <PageContent content={this.state.content} />
-            var button = <EditButton onClick={this.makeEditable}/>
+            var button = <Button value='Edit' onClick={this.makeEditable}/>
         }
         return (
 <div className='pageBox'>
-    <div className='pageHeader'>
-        {title}
-        {button}
-    </div>
+    {title}
     {content}
+    <div className='buttonBox'>
+        {button}
+        {(()=> {if( this.state.editable ) return cancelButton})() }
+        {(()=> {if( this.state.editable ) return deleteButton})() }
+    </div>
 </div>
                );
     }
@@ -63,6 +75,7 @@ var PageTitleEdit = React.createClass({
        value={this.props.title}
        onChange={this.props.update}
        placeholder="Title"
+       className="pageTitleEdit"
        />
                );
     }
@@ -75,8 +88,19 @@ var PageContent = React.createClass({
 <p className='emptyText'> Content </p>
                    );
         }
+
+        // Return the content with line breaks where \n is
         return (
-<p> {this.props.content} </p>
+<p>
+{this.props.content.split("\n").map(function(item){
+    return (
+<span>
+    {item}
+    <br/>
+</span>
+           );
+})} 
+</p>
                );
     }
 });
@@ -84,35 +108,26 @@ var PageContent = React.createClass({
 var PageContentEdit = React.createClass({
     render: function(){
         return (
-<input type='text'
+<textarea type='text'
        value={this.props.content}
        onChange={this.props.update}
        placeholder="Content"
+       className="pageContentEdit"
        />
                );
     }
 });
 
-var EditButton = React.createClass({
+var Button = React.createClass({
     render: function(){
         return (
 <input type='button' 
-       value='Edit' 
+       value={this.props.value}
        onClick={this.props.onClick}
        />
                );
     }
 });
 
-var DoneButton = React.createClass({
-    render: function(){
-        return (
-<input type='button'
-       value='Done'
-       onClick={this.props.onClick}
-       />
-               );
-    }
-});
 
 window.PageBox = PageBox;
