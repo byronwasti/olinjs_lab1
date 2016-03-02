@@ -6,7 +6,6 @@ var PageBox = React.createClass({
                 };
     },
     componentWillReceiveProps: function(nextProps){
-        console.log('test');
         this.setState({ editable: false,
                  content: nextProps.content,
                  title: nextProps.title
@@ -102,8 +101,8 @@ var PageContent = React.createClass({
 <p>
 {this.props.content.split("\n").map(function(item){
     return (
-<span>
-    {item}
+<span key={Math.random()} >
+    {item} 
     <br/>
 </span>
            );

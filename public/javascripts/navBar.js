@@ -11,7 +11,7 @@ var NavBar = React.createClass({
 var WebsiteName = React.createClass({
     render: function(){
         return (
-<h1> Drugpedia </h1>
+<h1>Drugpedia</h1>
         );
     }
 });
