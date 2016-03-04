@@ -82,7 +82,7 @@ var WikiBox = React.createClass({
         xhr.onreadystatechange = function(){
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var page = JSON.parse(xhr.responseText);
-                this.setState({pageTitle: '', pageContent: '', pageId: ''});
+                this.setState({pageTitle: '', pageContent: '', pageId: '', homepage:true});
                 this.loadPageTitlesFromServer();
             }
         }.bind(this);
