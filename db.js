@@ -1,3 +1,4 @@
+//sets up our connection to our database which is hosted on mongolabs
 var mongoose = require('mongoose');
 
 mongoose.connect('mongodb://olinjs:wiki@ds017688.mlab.com:17688/wikipages');

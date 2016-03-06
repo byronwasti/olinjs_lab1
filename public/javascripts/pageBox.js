@@ -1,4 +1,4 @@
-var PageBox = React.createClass({
+var PageBox = React.createClass({ //class for displaying pages, editing pages, deleting pages, and posting pages to server
     getInitialState: function(){
         return { editable: false,
                  content: this.props.content,
@@ -61,7 +61,7 @@ var PageBox = React.createClass({
     }
 });
 
-var PageTitle = React.createClass({
+var PageTitle = React.createClass({ //class for displaying the title of each page
     render: function(){
         if( this.props.title == '' ){
             return (
@@ -75,20 +75,19 @@ var PageTitle = React.createClass({
     }
 });
 
-var PageTitleEdit = React.createClass({
+var PageTitleEdit = React.createClass({ //class for editing the title of each page and creating a new page
     render: function(){
         return (
 <input type='text' 
        value={this.props.title}
        onChange={this.props.update}
        placeholder="Title"
-       className="pageTitleEdit"
-       />
+       className="pageTitleEdit"/>
                );
     }
 });
 
-var PageContent = React.createClass({
+var PageContent = React.createClass({ //class for displaying the content of each page
     render: function(){
         if( this.props.content == '' ){
             return (
@@ -112,26 +111,24 @@ var PageContent = React.createClass({
     }
 });
 
-var PageContentEdit = React.createClass({
+var PageContentEdit = React.createClass({ //class for editing the content of a new page and creating a new page
     render: function(){
         return (
 <textarea type='text'
        value={this.props.content}
        onChange={this.props.update}
        placeholder="Content"
-       className="pageContentEdit"
-       />
+       className="pageContentEdit"/>
                );
     }
 });
 
-var Button = React.createClass({
+var Button = React.createClass({  //class for the edit, delete, done, and cancel buttons
     render: function(){
         return (
 <input type='button' 
        value={this.props.value}
-       onClick={this.props.onClick}
-       />
+       onClick={this.props.onClick}/>
                );
     }
 });

@@ -1,4 +1,6 @@
-var xhr = new XMLHttpRequest();
+//this is the parent module for our React front-end, WikiBox is the parent class and contains the list of all pages and contains our NavBar, 
+//PageList, and PageDisplay classes
+var xhr = new XMLHttpRequest(); //we chose to use xhr instead of ajax since we didn't need all of jquery just to make ajax requests
 
 var WikiBox = React.createClass({
     getInitialState: function(){
@@ -7,7 +9,7 @@ var WikiBox = React.createClass({
     componentDidMount: function(){
         this.loadPageTitlesFromServer();
     },
-    loadPageTitlesFromServer: function(){
+    loadPageTitlesFromServer: function(){   //makes the get request for all of the titles, initially none of the titles have been clicked
         xhr.open('GET', '/api/titles');
         xhr.onreadystatechange = function(){
             if (xhr.readyState == 4 && xhr.status == 200) {
@@ -20,9 +22,9 @@ var WikiBox = React.createClass({
         }.bind(this);
         xhr.send();
     },
-    loadPageFromServer: function(id){
-        this.setState({homepage: false});
-        xhr.open('GET', '/api/page?id=' + id);
+    loadPageFromServer: function(id){   //when the user clicks on a page, send the id to the server to retrieve the selected page
+        this.setState({homepage: false});   //we know the user wants to view a page so we replace the home page with the page they clicked on
+        xhr.open('GET', '/api/page?id=' + id);  //this is how we sent the id in the query to the server
         xhr.onreadystatechange = function(){
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var page = JSON.parse(xhr.responseText);
@@ -32,22 +34,21 @@ var WikiBox = React.createClass({
         }.bind(this);
         xhr.send();
         var newTitles = this.state.pageTitles.map(function(title){
-            if (title._id === id){
+            if (title._id === id){  //finds the title that was clicked and sets its isClicked attribute to true
                 title.isClicked = true;
             } else {
-                title.isClicked = false;
+                title.isClicked = false;   //set the isClicked attribute of all other titles to false
             }
             return title;
         });
         this.setState({pageTitles: newTitles});
     },
     createNewPage: function(){
-        this.setState({pageTitle: '', pageContent: '', pageId: ''});
+        this.setState({pageTitle: '', pageContent: '', pageId: ''});    //replace the home page with a blank PageBox class
         this.setState({homepage: false});
     },
     postPageServerUpdate: function(title, content){
-        console.log("Posting a new page!");
-        xhr.open('POST', '/api/page');
+        xhr.open('POST', '/api/page');  //makes a post request to the server with the title and content for the new page
         xhr.onreadystatechange = function(){
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var page = JSON.parse(xhr.responseText);
@@ -57,15 +58,13 @@ var WikiBox = React.createClass({
         }.bind(this);
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.send('title='+title+'&content='+content);
-
-        this.setState({pageTitle: title, pageContent:content});
-        this.setState({pageTitles: this.state.pageTitles.append(title)});
+        this.setState({pageTitle: title, pageContent:content, pageTitles: this.state.pageTitles.append(title)});
     },
     editPageServerUpdate: function(title,content){
-        if( this.state.pageId == '' ){
+        if( this.state.pageId == '' ){  //if there is no page id then we need to create a new page
             return this.postPageServerUpdate(title, content);
         }
-        xhr.open('PUT', '/api/page');
+        xhr.open('PUT', '/api/page');   //used a put request since put and get are supposed to be inverse operations
         xhr.onreadystatechange = function(){
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var page = JSON.parse(xhr.responseText);
@@ -74,23 +73,22 @@ var WikiBox = React.createClass({
         }.bind(this);
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.send('title='+title+'&content='+content+'&id='+this.state.pageId);
-
         this.setState({pageTitle: title, pageContent:content});
     },
     deletePageServerUpdate: function(){
-        xhr.open('DELETE', '/api/page');
+        xhr.open('DELETE', '/api/page');    //deletes the page from the database
         xhr.onreadystatechange = function(){
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var page = JSON.parse(xhr.responseText);
-                this.setState({pageTitle: '', pageContent: '', pageId: '', homepage:true});
+                this.setState({pageTitle: '', pageContent: '', pageId: '', homepage:true}); //empty out page title, content, id and load home page
                 this.loadPageTitlesFromServer();
             }
         }.bind(this);
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.send('id='+this.state.pageId);
     },
-    searchChange: function(e){
-        this.setState({search: e.target.value.toLowerCase()});
+    searchChange: function(e){ 
+        this.setState({search: e.target.value.toLowerCase()});  //makes sure state matches input in search bar
     },
     render: function(){
         if(this.state.homepage) {

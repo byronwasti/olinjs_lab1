@@ -1,6 +1,5 @@
-var PageList = React.createClass({
+var PageList = React.createClass({  //class for the page list displays all of the pages
     render: function(){
-        // var ulStyle = {"listStyleType": "none"};
         return (
         <div className='pageList'>
         <input type='text' placeholder='Search' onChange={this.props.searchChange}/>
@@ -17,7 +16,7 @@ var PageList = React.createClass({
     }
 });
 
-var PageListElement = React.createClass({
+var PageListElement = React.createClass({ //class for each page title
     getPage: function(){
       this.props.getPage(this.props.id);
     },

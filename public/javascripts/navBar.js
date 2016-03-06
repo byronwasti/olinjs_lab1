@@ -1,4 +1,4 @@
-var NavBar = React.createClass({
+var NavBar = React.createClass({	//class for title
     render: function(){
         return (
 <div className='navBar'>
