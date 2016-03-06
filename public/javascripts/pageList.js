@@ -3,7 +3,7 @@ var PageList = React.createClass({  //class for the page list displays all of th
         return (
         <div className='pageList'>
         <input type='text' placeholder='Search' onChange={this.props.searchChange}/>
-        <ul style={{"listStyleType": "none"}}>
+        <ul>
         {this.props.titles.map(function(title){
             return (
         <li key={title._id+'_li'}><PageListElement title={title.title} key={title._id} id={title._id} getPage={this.props.getPage} isPressed={title.isClicked}/></li>
