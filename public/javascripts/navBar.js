@@ -1,9 +1,9 @@
 var NavBar = React.createClass({	//class for title
     render: function(){
         return (
-<div className='navBar'>
-<WebsiteName />
-</div>
+            <div className='navBar'>
+                <WebsiteName />
+            </div>
         );
     }
 });
@@ -11,7 +11,7 @@ var NavBar = React.createClass({	//class for title
 var WebsiteName = React.createClass({
     render: function(){
         return (
-<h1>Drugpedia</h1>
+            <h1>Drugpedia</h1>
         );
     }
 });

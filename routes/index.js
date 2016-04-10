@@ -3,6 +3,7 @@ var Page = require('../models/pageModel.js');
 
 module.exports = function(){
     return {
+        //why are your tabs now eight spaces instead of four?
     	//gets all the pages from the database and only selects the titles and the ids to send to the client
         getTitles: function(req, res){
         	Page.find({}, function(err, pages){

@@ -35,8 +35,11 @@ var PageBox = React.createClass({ //class for displaying pages, editing pages, d
     },
     render: function(){
         if( this.state.editable ){
-            var title = <PageTitleEdit title={this.state.title} 
-                                       update={this.onTitleChange}/>
+            // this is probably how I would format these lines
+            var title = <PageTitleEdit
+                            title={this.state.title}
+                            update={this.onTitleChange}
+                        />
             var content = <PageContentEdit content={this.state.content}
                                        update={this.onContentChange}/>
             var button = <Button value='Done' onClick={this.finishEdit}/>
@@ -52,6 +55,7 @@ var PageBox = React.createClass({ //class for displaying pages, editing pages, d
     {title}
     {content}
     <div className='buttonBox'>
+        //I like the es6 but do you have any way to make sure it works on most browsers?
         {button}
         {(()=> {if( this.state.editable ) return cancelButton})() }
         {(()=> {if( this.state.editable ) return deleteButton})() }
@@ -78,12 +82,13 @@ var PageTitle = React.createClass({ //class for displaying the title of each pag
 var PageTitleEdit = React.createClass({ //class for editing the title of each page and creating a new page
     render: function(){
         return (
-<input type='text' 
-       value={this.props.title}
-       onChange={this.props.update}
-       placeholder="Title"
-       className="pageTitleEdit"/>
-               );
+            <input type='text'
+                value={this.props.title}
+                onChange={this.props.update}
+                placeholder="Title"
+                className="pageTitleEdit"
+            />
+        );
     }
 });
 
@@ -101,11 +106,11 @@ var PageContent = React.createClass({ //class for displaying the content of each
 {this.props.content.split("\n").map(function(item){
     return (
 <span key={Math.random()} >
-    {item} 
+    {item}
     <br/>
 </span>
            );
-})} 
+})}
 </p>
                );
     }
@@ -126,7 +131,7 @@ var PageContentEdit = React.createClass({ //class for editing the content of a n
 var Button = React.createClass({  //class for the edit, delete, done, and cancel buttons
     render: function(){
         return (
-<input type='button' 
+<input type='button'
        value={this.props.value}
        onClick={this.props.onClick}/>
                );

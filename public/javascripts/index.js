@@ -1,5 +1,6 @@
 //this is the parent module for our React front-end, WikiBox is the parent class and contains the list of all pages and contains our NavBar, 
 //PageList, and PageDisplay classes
+// I respect going light weight, have you both seen fetch. Its supported by most major browsers and has a jquery esque syntax
 var xhr = new XMLHttpRequest(); //we chose to use xhr instead of ajax since we didn't need all of jquery just to make ajax requests
 
 var WikiBox = React.createClass({
@@ -100,6 +101,7 @@ var WikiBox = React.createClass({
                      deletePage={this.deletePageServerUpdate}/>
         }
         return (
+// this indenting is off
 <div className='wikiBox'>
     <NavBar />
     <div className='flexWrapper'>
@@ -126,6 +128,7 @@ var WikiBox = React.createClass({
 var PageHome = React.createClass({
     render: function(){
         return (
+//here too
 <div className='pageBox'>
     <h1>Welcome to Drugpedia!</h1>
     <p> Please click a drug on the left to learn more! <br/>
