@@ -6,4 +6,5 @@ var pageSchema = mongoose.Schema({
   content: String
 });
 
+// Technically Mongoose authomatically looks for the plural version of your collection name --> i.e. "Wikipages" instead of "wikipages"
 module.exports = mongoose.model('wikipages', pageSchema);
