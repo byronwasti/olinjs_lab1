@@ -10,6 +10,11 @@ var bodyParser = require('body-parser');
 
 var app = express();
 app.use(logger('dev'));
+
+
+// Nice use of sass - other than that don't have much to say - indentintation is off at several points 
+// in your files but it doesn't matter much. Props on breaking down your frontend scripts and commenting 
+// your code where you thought best.
 app.use(sassMiddleware({
   src: path.join(__dirname, '/sass'),
   dest: path.join(__dirname, '/public/styles'),
